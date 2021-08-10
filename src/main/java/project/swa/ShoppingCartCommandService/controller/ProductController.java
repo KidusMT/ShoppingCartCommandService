@@ -1,12 +1,12 @@
-package project.swa.ShoppingCartService.controller;
+package project.swa.ShoppingCartCommandService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.swa.ShoppingCartService.exception.ShoppingCartNotFoundException;
-import project.swa.ShoppingCartService.service.ShoppingCartDTO;
-import project.swa.ShoppingCartService.service.ShoppingCartService;
+import project.swa.ShoppingCartCommandService.exception.ShoppingCartNotFoundException;
+import project.swa.ShoppingCartCommandService.service.ShoppingCartDTO;
+import project.swa.ShoppingCartCommandService.service.ShoppingCartService;
 
 import java.util.List;
 

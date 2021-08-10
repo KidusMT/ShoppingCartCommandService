@@ -1,4 +1,4 @@
-package project.swa.ShoppingCartService.controller;
+package project.swa.ShoppingCartCommandService.controller;
 
 import org.springframework.http.HttpStatus;
 

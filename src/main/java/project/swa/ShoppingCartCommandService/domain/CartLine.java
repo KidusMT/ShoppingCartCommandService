@@ -1,7 +1,7 @@
-package project.swa.ShoppingCartService.domain;
+package project.swa.ShoppingCartCommandService.domain;
 
 import lombok.Data;
-import project.swa.ShoppingCartService.service.ProductDTO;
+import project.swa.ShoppingCartCommandService.service.ProductDTO;
 
 @Data
 public class CartLine {

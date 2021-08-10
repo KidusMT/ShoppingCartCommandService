@@ -1,6 +1,6 @@
-package project.swa.ShoppingCartService.service;
+package project.swa.ShoppingCartCommandService.service;
 
-import project.swa.ShoppingCartService.domain.CartLine;
+import project.swa.ShoppingCartCommandService.domain.CartLine;
 
 public class CartLineAdapter {
     public static CartLine getShoppingCart(CartLineDTO cartLineDTO) {

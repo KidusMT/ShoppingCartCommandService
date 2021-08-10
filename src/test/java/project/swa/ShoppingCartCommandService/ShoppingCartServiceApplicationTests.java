@@ -1,4 +1,4 @@
-package project.swa.ShoppingCartService;
+package project.swa.ShoppingCartCommandService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

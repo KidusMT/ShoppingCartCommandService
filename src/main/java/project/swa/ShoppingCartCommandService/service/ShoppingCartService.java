@@ -1,10 +1,10 @@
-package project.swa.ShoppingCartService.service;
+package project.swa.ShoppingCartCommandService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.swa.ShoppingCartService.data.ShoppingCartRepository;
-import project.swa.ShoppingCartService.domain.ShoppingCart;
-import project.swa.ShoppingCartService.exception.ShoppingCartNotFoundException;
+import project.swa.ShoppingCartCommandService.data.ShoppingCartRepository;
+import project.swa.ShoppingCartCommandService.domain.ShoppingCart;
+import project.swa.ShoppingCartCommandService.exception.ShoppingCartNotFoundException;
 
 import java.util.List;
 import java.util.Optional;

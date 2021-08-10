@@ -1,6 +1,6 @@
-package project.swa.ShoppingCartService.service;
+package project.swa.ShoppingCartCommandService.service;
 
-import project.swa.ShoppingCartService.domain.ShoppingCart;
+import project.swa.ShoppingCartCommandService.domain.ShoppingCart;
 
 public class ShoppingCartAdapter {
     public static ShoppingCart getShoppingCart(ShoppingCartDTO shoppingCartDTO) {

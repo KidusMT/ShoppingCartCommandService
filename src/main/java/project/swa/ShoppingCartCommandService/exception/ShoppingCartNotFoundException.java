@@ -1,4 +1,4 @@
-package project.swa.ShoppingCartService.exception;
+package project.swa.ShoppingCartCommandService.exception;
 
 public class ShoppingCartNotFoundException extends RuntimeException {
 

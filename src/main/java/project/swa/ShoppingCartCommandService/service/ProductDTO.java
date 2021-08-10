@@ -1,4 +1,4 @@
-package project.swa.ShoppingCartService.service;
+package project.swa.ShoppingCartCommandService.service;
 
 import lombok.Data;
 
