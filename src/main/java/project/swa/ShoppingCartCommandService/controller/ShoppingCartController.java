@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.swa.ShoppingCartCommandService.exception.ShoppingCartNotFoundException;
+import project.swa.ShoppingCartCommandService.integration.KafkaSender;
 import project.swa.ShoppingCartCommandService.service.ShoppingCartDTO;
 import project.swa.ShoppingCartCommandService.service.ShoppingCartService;
 
@@ -12,17 +13,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/shopping")
-public class ProductController {
+public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    private KafkaSender kafkaSender;
 
     @GetMapping
     public ResponseEntity<List<ShoppingCartDTO>> getCustomers() {
         List<ShoppingCartDTO> customerDTO1 = shoppingCartService.getAll();
         try {
             if (customerDTO1 != null) {
-                return new ResponseEntity<>(customerDTO1, HttpStatus.CREATED);
+                return new ResponseEntity<>(customerDTO1, HttpStatus.OK);
             } else {
                 throw new ShoppingCartNotFoundException("Product not found");
             }
@@ -33,11 +37,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ShoppingCartDTO> addCustomer(@RequestBody ShoppingCartDTO customerDTO) {
-        ShoppingCartDTO customerDTO1 = shoppingCartService.add(customerDTO);
+    public ResponseEntity<ShoppingCartDTO> addCustomer(@RequestBody ShoppingCartDTO cartDTO) {
+        ShoppingCartDTO shoppingCartDTO = shoppingCartService.add(cartDTO);
         try {
-            if (customerDTO1 != null) {
-                return new ResponseEntity<>(customerDTO1, HttpStatus.CREATED);
+            if (shoppingCartDTO != null) {
+                kafkaSender.send(shoppingCartDTO);
+                return new ResponseEntity<>(shoppingCartDTO, HttpStatus.CREATED);
             } else {
                 throw new ShoppingCartNotFoundException("Product not found");
             }
@@ -48,10 +53,11 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ShoppingCartDTO> updateCustomer(@PathVariable String id, @RequestBody ShoppingCartDTO customerDTO) {
-        ShoppingCartDTO customerDTO1 = shoppingCartService.update(id, customerDTO);
-        if (customerDTO1 != null) {
-            return new ResponseEntity<>(customerDTO1, HttpStatus.CREATED);
+    public ResponseEntity<ShoppingCartDTO> updateCustomer(@PathVariable String id, @RequestBody ShoppingCartDTO cartDTO) {
+        ShoppingCartDTO shoppingCartDTO = shoppingCartService.update(id, cartDTO);
+        if (shoppingCartDTO != null) {
+            kafkaSender.send(shoppingCartDTO);
+            return new ResponseEntity<>(shoppingCartDTO, HttpStatus.OK);
         } else {
             throw new ShoppingCartNotFoundException("Product not found");
         }
@@ -59,9 +65,10 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ShoppingCartDTO> deleteCustomer(@PathVariable String id) {
-        ShoppingCartDTO customerDTO1 = shoppingCartService.delete(id);
-        if (customerDTO1 != null) {
-            return new ResponseEntity<>(customerDTO1, HttpStatus.CREATED);
+        ShoppingCartDTO shoppingCartDTO = shoppingCartService.delete(id);
+        if (shoppingCartDTO != null) {
+            kafkaSender.send(shoppingCartDTO);
+            return new ResponseEntity<>(shoppingCartDTO, HttpStatus.OK);
         } else {
             throw new ShoppingCartNotFoundException("Product not found");
         }
