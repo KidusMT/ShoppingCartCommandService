@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import project.swa.ShoppingCartCommandService.service.ShoppingCartDTO;
 
 @Component
-public class JmsSender {
+public class KafkaSender {
     @Autowired
     private KafkaTemplate<String, ShoppingCartDTO> kafkaTemplate;
 
-    @Value("${app.topic.customertopic}")
+    @Value("${app.topic.shoppingcarttopic}")
     private String topic;
 
     public void send(ShoppingCartDTO shoppingCartDTO){
