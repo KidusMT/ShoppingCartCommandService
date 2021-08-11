@@ -12,7 +12,7 @@ import project.swa.ShoppingCartCommandService.service.ShoppingCartService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/shopping")
+@RequestMapping("/shoppingcommand")
 public class ShoppingCartController {
 
     @Autowired
