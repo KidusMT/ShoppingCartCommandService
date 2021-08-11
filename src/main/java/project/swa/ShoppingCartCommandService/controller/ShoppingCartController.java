@@ -1,5 +1,7 @@
 package project.swa.ShoppingCartCommandService.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/shoppingcommand")
 public class ShoppingCartController {
+    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class.getName());
 
     @Autowired
     private ShoppingCartService shoppingCartService;
@@ -23,6 +26,7 @@ public class ShoppingCartController {
 
     @GetMapping
     public ResponseEntity<List<ShoppingCartDTO>> getCustomers() {
+        logger.info("Calling GET /shoppingcommand");
         List<ShoppingCartDTO> customerDTO1 = shoppingCartService.getAll();
         try {
             if (customerDTO1 != null) {
@@ -38,6 +42,7 @@ public class ShoppingCartController {
 
     @PostMapping
     public ResponseEntity<ShoppingCartDTO> addCustomer(@RequestBody ShoppingCartDTO cartDTO) {
+        logger.info("Calling POST /shoppingcommand");
         ShoppingCartDTO shoppingCartDTO = shoppingCartService.add(cartDTO);
         try {
             if (shoppingCartDTO != null) {
@@ -54,6 +59,7 @@ public class ShoppingCartController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ShoppingCartDTO> updateCustomer(@PathVariable String id, @RequestBody ShoppingCartDTO cartDTO) {
+        logger.info("Calling PUT /shoppingcommand");
         ShoppingCartDTO shoppingCartDTO = shoppingCartService.update(id, cartDTO);
         if (shoppingCartDTO != null) {
             kafkaSender.send(shoppingCartDTO);
@@ -65,6 +71,7 @@ public class ShoppingCartController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ShoppingCartDTO> deleteCustomer(@PathVariable String id) {
+        logger.info("Calling DELETE /shoppingcommand");
         ShoppingCartDTO shoppingCartDTO = shoppingCartService.delete(id);
         if (shoppingCartDTO != null) {
             kafkaSender.send(shoppingCartDTO);
