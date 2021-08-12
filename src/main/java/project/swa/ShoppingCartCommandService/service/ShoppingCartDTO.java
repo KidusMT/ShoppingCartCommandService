@@ -1,16 +1,34 @@
 package project.swa.ShoppingCartCommandService.service;
 
-import lombok.Data;
-
 import java.util.List;
 
-@Data
+//@Data
+//@NoArgsConstructor
 public class ShoppingCartDTO {
     private String shoppingCartNumber;
     private List<CartLineDTO> cartLineDTOS;
 
     public ShoppingCartDTO(String shoppingCartNumber, List<CartLineDTO> cartLineDTOS) {
         this.shoppingCartNumber = shoppingCartNumber;
+        this.cartLineDTOS = cartLineDTOS;
+    }
+
+    public ShoppingCartDTO() {
+    }
+
+    public String getShoppingCartNumber() {
+        return shoppingCartNumber;
+    }
+
+    public void setShoppingCartNumber(String shoppingCartNumber) {
+        this.shoppingCartNumber = shoppingCartNumber;
+    }
+
+    public List<CartLineDTO> getCartLineDTOS() {
+        return cartLineDTOS;
+    }
+
+    public void setCartLineDTOS(List<CartLineDTO> cartLineDTOS) {
         this.cartLineDTOS = cartLineDTOS;
     }
 }
